@@ -1,11 +1,3 @@
-//
-//  GPUImageTwoInputCrossTextureSamplingFilter.m
-//  GPUImage
-//
-//  Created by Ian Simon on 1/29/13.
-//  Copyright (c) 2013 Brad Larson. All rights reserved.
-//
-
 #import "GPUImageTwoInputCrossTextureSamplingFilter.h"
 
 NSString *const kGPUImageTwoInputNearbyTexelSamplingVertexShaderString = SHADER_STRING
@@ -14,8 +6,8 @@ NSString *const kGPUImageTwoInputNearbyTexelSamplingVertexShaderString = SHADER_
  attribute vec4 inputTextureCoordinate;
  attribute vec4 inputTextureCoordinate2;
  
- uniform highp float texelWidth;
- uniform highp float texelHeight;
+ uniform float texelWidth;
+ uniform float texelHeight;
  
  varying vec2 textureCoordinate;
  varying vec2 leftTextureCoordinate;
@@ -79,7 +71,7 @@ NSString *const kGPUImageTwoInputNearbyTexelSamplingVertexShaderString = SHADER_
         _texelHeight = 1.0 / filterFrameSize.height;
         
         runSynchronouslyOnVideoProcessingQueue(^{
-            [GPUImageOpenGLESContext setActiveShaderProgram:filterProgram];
+            [GPUImageContext setActiveShaderProgram:filterProgram];
             if (GPUImageRotationSwapsWidthAndHeight(inputRotation))
             {
                 glUniform1f(texelWidthUniform, _texelHeight);
